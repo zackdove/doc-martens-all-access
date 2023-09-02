@@ -51,8 +51,8 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  animation: titleTextAnim 2s both;
-  animation-delay: 1s;
+  animation: titleTextAnim 3s both;
+  animation-delay: 3s;
 }
 
 #titleTextBlur {
@@ -126,6 +126,7 @@ body {
   font-family: "ABC Social Condensed";
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  white-space: nowrap;
 }
 
 #mainContentThird {
@@ -178,6 +179,61 @@ body {
   text-indent: 32px;
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+@media only screen and (min-width: 782px) {
+  #mainContent {
+    min-height: 2500px;
+  }
+  #mainContentFirst {
+    max-width: 60vw;
+    font-size: 2.7vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #mainContentSecond {
+    width: 30vw;
+    position: absolute;
+    top: 0;
+    right: 38.5px;
+  }
+  #mainContentThird {
+    width: 45vw;
+    position: absolute;
+    top: 42vw;
+    right: 38.5px;
+    font-size: 2vw;
+  }
+  #mainContentFourth {
+    position: absolute;
+    top: max(37vw, 463px);
+    left: 0;
+    max-width: 50vw;
+  }
+  #mainContentFifth {
+    position: absolute;
+    top: max(86vw, 1207px);
+    left: 0;
+    max-width: 100vw;
+  }
+  #mainContentFifth::before {
+    content: "";
+    float: left;
+    width: 51vw;
+    height: 14vw;
+  }
+  #mainContentSixth {
+    width: 50vw;
+    position: absolute;
+    top: max(120vw, 1399px);
+    left: 30vw;
+  }
+  #mainContentSeventh {
+    width: 25vw;
+    position: absolute;
+    top: max(120vw, 1399px);
+  }
 }
 
 #storiesSection {
@@ -352,6 +408,9 @@ body {
   letter-spacing: -0.04em;
   line-height: 0.8em;
 }
+.titokTitleTitle.smaller {
+  font-size: 50px;
+}
 .titokTitleTitle > div {
   width: 100%;
 }
@@ -387,7 +446,6 @@ section {
   height: 100vh;
   z-index: 0;
   position: fixed;
-  background: radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c);
 }
 .arrowUp {
   position: absolute;
