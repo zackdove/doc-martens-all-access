@@ -181,58 +181,72 @@ body {
   padding-bottom: 32px;
 }
 
+#mainContentInner {
+  max-width: 1179px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @media only screen and (min-width: 782px) {
   #mainContent {
-    min-height: 2500px;
+    min-height: 2100px;
   }
   #mainContentFirst {
-    max-width: 60vw;
-    font-size: 2.7vw;
+    max-width: 50vw;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 15px;
+    left: 32px;
+    max-width: 615px;
   }
   #mainContentSecond {
-    width: 30vw;
+    width: 40vw;
     position: absolute;
     top: 0;
     right: 38.5px;
+    max-width: 480px;
   }
   #mainContentThird {
     width: 45vw;
     position: absolute;
-    top: 42vw;
+    top: 640px;
     right: 38.5px;
-    font-size: 2vw;
+    max-width: 555px;
   }
   #mainContentFourth {
     position: absolute;
-    top: max(37vw, 463px);
+    top: 530px;
     left: 0;
-    max-width: 50vw;
+    width: 50vw;
+    max-width: 600px;
   }
   #mainContentFifth {
     position: absolute;
-    top: max(86vw, 1207px);
+    top: 1090px;
     left: 0;
-    max-width: 100vw;
+    max-width: 90vw;
   }
   #mainContentFifth::before {
     content: "";
     float: left;
-    width: 51vw;
-    height: 14vw;
+    width: 50vw;
+    max-width: 592px;
+    height: 16vw;
+    max-height: 242px;
   }
   #mainContentSixth {
-    width: 50vw;
+    width: 46vw;
     position: absolute;
-    top: max(120vw, 1399px);
-    left: 30vw;
+    top: 1607px;
+    right: 64px;
+    max-width: 600px;
   }
   #mainContentSeventh {
     width: 25vw;
+    max-width: 412px;
     position: absolute;
-    top: max(120vw, 1399px);
+    top: 1568px;
+    left: 32px;
   }
 }
 
