@@ -121,12 +121,16 @@ body {
   right: 0;
   font-size: 30px;
   height: 100%;
+  overflow-y: hidden;
   background-color: #ffe512;
   color: black;
   font-family: "ABC Social Condensed";
   writing-mode: vertical-rl;
   text-orientation: mixed;
   white-space: nowrap;
+}
+#verticalScroller span > span {
+  padding-top: 16px;
 }
 
 #mainContentThird {
@@ -193,7 +197,7 @@ body {
     min-height: 2100px;
   }
   #mainContentFirst {
-    max-width: 50vw;
+    width: 50vw;
     position: absolute;
     top: 15px;
     left: 32px;
@@ -336,6 +340,9 @@ body {
   text-transform: uppercase;
   background-color: #ffe512;
   color: black;
+}
+#horizontalScroller span > span {
+  padding-left: 16px;
 }
 
 #tiktokSection {

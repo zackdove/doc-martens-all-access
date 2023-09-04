@@ -35,17 +35,18 @@ const lerp = (current, target, factor) =>
   current * (1 - factor) + target * factor;
 
 class LoopingText {
-  constructor(el) {
+  constructor(el, vertical = false) {
     this.el = el;
     this.lerp = { current: 0, target: 0 };
     this.interpolationFactor = 0.1;
-    this.speed = 0.1;
+    this.speed = vertical ? 0.01 : 0.05;
     this.direction = el.classList.contains("reverse") ? -1 : 1; // -1 (to-left), 1 (to-right)
     // Init
+    this.vertical = vertical;
     this.el.style.cssText = `position: relative; display: inline-flex; white-space: nowrap;`;
-    this.el.children[1].style.cssText = `position: absolute; left: ${
-      100 * -this.direction
-    }%;`;
+    this.el.children[1].style.cssText = `position: absolute; ${
+      vertical ? "top" : "left"
+    }: ${100 * -this.direction}%;`;
     // this.events();
     // this.render();
   }
@@ -73,12 +74,10 @@ class LoopingText {
     }
 
     const x = this.lerp.current * this.direction;
-    this.el.style.transform = `translateX(${x}%)`;
-  }
 
-  render() {
-    this.animate();
-    window.requestAnimationFrame(() => this.render());
+    this.el.style.transform = this.vertical
+      ? `translateY(${x}%)`
+      : `translateX(${x}%)`;
   }
 }
 
@@ -94,4 +93,8 @@ render();
 
 updatables.push(
   new LoopingText(document.getElementById("horizontalScrollerContainer"))
+);
+
+updatables.push(
+  new LoopingText(document.getElementById("verticalScrollerContainer"), true)
 );
