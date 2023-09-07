@@ -194,7 +194,7 @@ body {
 
 @media only screen and (min-width: 782px) {
   #mainContent {
-    min-height: 2100px;
+    min-height: 2150px;
   }
   #mainContentFirst {
     width: 50vw;
