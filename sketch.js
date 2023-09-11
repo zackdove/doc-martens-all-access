@@ -180,3 +180,9 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+window.onload = () => {
+  console.log("fully loaded");
+  document.querySelector(".lds-ellipsis").classList.add("fade-out");
+  document.getElementById("titleArrow").classList.add("fade-in");
+};

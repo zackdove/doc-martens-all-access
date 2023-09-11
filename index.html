@@ -13,10 +13,30 @@
 
     <section id="titleContainer">
       <div id="titleVideoContainer">
-        <img src="./images/drmartens x crack.jpeg" />
+        <video
+          src="./images/header_video_smaller_1.mp4"
+          muted
+          autoplay
+          poster="./images/drmartens x crack.jpeg"
+        ></video>
       </div>
       <svg id="titleTextBlur" viewBox="0 0 939 462"></svg>
       <img id="titleText" src="./images/allAccess.svg" />
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <svg
+        class="arrowDown"
+        id="titleArrow"
+        viewBox="0 0 78 47"
+        onclick="document.getElementById('mainContent')
+      .scrollIntoView({
+        behavior: 'smooth'
+      })"
+      ></svg>
     </section>
 
     <section id="mainContent">
