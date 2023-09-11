@@ -69,21 +69,37 @@ function isElementInViewport(el) {
   );
 }
 
+function isElementInViewportFull(el) {
+  var rect = el.getBoundingClientRect();
+
+  return (
+    rect.top >= -10 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) + 10
+  );
+}
+
 function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
 // Total distance of each path
-const maxDistance = offset * sources.length;
+const maxDistance =
+  offset * sources.length * (window.innerWidth < 782 ? 0.5 : 1);
+console.log(maxDistance);
 class MovingImage {
   constructor(url, index) {
-    this.image = loadImage(url);
+    this.image = loadImage(url, (i) => {
+      this.scale = this.isHorizontal ? 1 : 0.6 + Math.random() * 0.4;
+      this.scale *= window.innerWidth < 782 ? 0.5 : 1;
+      i.resize(this.image.width * this.scale, 0);
+    });
     this.index = index;
 
     // console.log(this.index);
     // console.log(this.indexInSet);
     this.isHorizontal = this.image.width > this.image.height;
-    this.scale = this.isHorizontal ? 1 : 0.6 + Math.random() * 0.4;
+
     this.x = 0;
     this.y = 0;
     // Counter-clockwise from 0
@@ -106,15 +122,14 @@ class MovingImage {
       this.x < width / 2 + this.image.width &&
       this.y > -height / 2 - this.image.height &&
       this.y < height / 2 + this.image.height &&
-      ((this.isEven && containerInView === 1) ||
-        (!this.isEven && containerInView === 2))
+      containerInView === 2
     ) {
       image(
         this.image,
         -this.image.width / 2 + this.x,
         -this.image.height / 2 + this.y,
-        this.image.width * this.scale,
-        this.image.height * this.scale
+        this.image.width,
+        this.image.height
       );
     }
   }
@@ -128,8 +143,24 @@ function preload() {
 }
 
 function handleWheel(e) {
-  scrollAmount += e.deltaY;
-  e.preventDefault();
+  if (isElementInViewportFull(imageGallery2)) {
+    e.preventDefault();
+    scrollAmount += e.deltaY;
+  }
+}
+
+let touchStartY = 0;
+
+function handleTouchStart(e) {
+  touchStartY = e.touches[0].clientY;
+}
+
+function handleTouchMove(e) {
+  if (isElementInViewportFull(imageGallery2)) {
+    console.log("move");
+    e.preventDefault();
+    scrollAmount += (touchStartY - e.touches[0].clientY) / 10;
+  }
 }
 
 function setup() {
@@ -141,18 +172,26 @@ function setup() {
   el.addEventListener("wheel", handleWheel);
 
   const imageGallery2 = document.getElementById("imageGallery2");
-  window.addEventListener("wheel", () => {
+  window.addEventListener("wheel", (e) => {
     if (isElementInViewport(imageGallery2)) {
       console.log("HES IN");
       containerInView = 2;
-      imageGallery2.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
     } else {
       containerInView = 0;
     }
   });
+  if (window.matchMedia("(hover: none)").matches) {
+    el.addEventListener("touchstart", handleTouchStart);
+    el.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("scroll", (e) => {
+      if (isElementInViewport(imageGallery2)) {
+        console.log("HES IN");
+        containerInView = 2;
+      } else {
+        containerInView = 0;
+      }
+    });
+  }
 }
 
 function draw() {
@@ -179,3 +218,10 @@ window.onload = () => {
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 };
+
+const appHeight = () => {
+  const doc = document.documentElement;
+  doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+};
+window.addEventListener("resize", appHeight);
+appHeight();

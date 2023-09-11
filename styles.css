@@ -13,6 +13,10 @@
   src: url("./fonts/ABC Social/ABCSocial-Regular.woff");
 }
 
+:root {
+  --app-height: 100vh;
+}
+
 body {
   margin: 0;
   width: 100vw;
@@ -33,12 +37,15 @@ body.allowScroll {
 #titleContainer {
   width: 100vw;
   height: 100vh;
+  height: var(--app-height);
 }
 
 #titleVideoContainer > * {
   position: absolute;
   z-index: -1;
+  top: 0;
   height: 100vh;
+  height: var(--app-height);
   width: 100vw;
   object-fit: cover;
 }
@@ -85,7 +92,7 @@ body.allowScroll {
 .imageGalleryContainer {
   width: 100vw;
   position: relative;
-  height: 100vh;
+  height: var(--app-height);
   pointer-events: none;
   background-color: transparent;
 }
@@ -96,14 +103,14 @@ body.allowScroll {
 }
 
 #mainContentFirst {
-  font-size: max(24px, 4.44vw);
+  font-size: max(24px, 4.1vw);
 
-  line-height: max(32.5px, 5.55vw);
+  line-height: max(32.5px, 5.1vw);
   text-align: center;
   letter-spacing: 0.01em;
 
   box-sizing: border-box;
-  padding: 128px 5vw;
+  padding: 128px 7vw;
 }
 
 .caption {
@@ -216,7 +223,7 @@ body.allowScroll {
 #tiktokSection {
   position: relative;
   background-color: black;
-  min-height: 100vh;
+  min-height: var(--app-height);
 }
 #tiktoksContainer {
   background-color: black;
@@ -333,7 +340,7 @@ section {
 }
 #imageGalleryBehind {
   width: 100%;
-  height: 100vh;
+  height: var(--app-height);
   z-index: 0;
   position: fixed;
 }
