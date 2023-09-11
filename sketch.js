@@ -74,13 +74,12 @@ function mod(n, m) {
 }
 
 // Total distance of each path
-const maxDistance = (offset * sources.length) / 2;
+const maxDistance = offset * sources.length;
 class MovingImage {
   constructor(url, index) {
     this.image = loadImage(url);
     this.index = index;
-    this.isEven = index % 2 === 0;
-    this.indexInSet = Math.floor(index / 2);
+
     // console.log(this.index);
     // console.log(this.indexInSet);
     this.isHorizontal = this.image.width > this.image.height;
@@ -90,16 +89,13 @@ class MovingImage {
     // Counter-clockwise from 0
     this.angle = Math.random() * 2 * Math.PI;
     // Distance from center
-    this.distance = this.indexInSet * offset;
+    this.distance = this.index * offset;
     this.startX = 0;
     this.startY = 0;
   }
   update() {
     this.distance =
-      mod(
-        this.indexInSet * offset + frameCount * 2 + scrollAmount,
-        maxDistance
-      ) -
+      mod(this.index * offset + frameCount * 2 + scrollAmount, maxDistance) -
       maxDistance / 2;
     this.x = this.distance * Math.cos(this.angle);
     this.y = this.distance * Math.sin(this.angle);
@@ -144,17 +140,9 @@ function setup() {
   const el = document.querySelector(".p5Canvas");
   el.addEventListener("wheel", handleWheel);
 
-  const imageGallery1 = document.getElementById("imageGallery1");
   const imageGallery2 = document.getElementById("imageGallery2");
   window.addEventListener("wheel", () => {
-    if (isElementInViewport(imageGallery1)) {
-      console.log("HES IN");
-      containerInView = 1;
-      imageGallery1.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    } else if (isElementInViewport(imageGallery2)) {
+    if (isElementInViewport(imageGallery2)) {
       console.log("HES IN");
       containerInView = 2;
       imageGallery2.scrollIntoView({
@@ -185,4 +173,9 @@ window.onload = () => {
   console.log("fully loaded");
   document.querySelector(".lds-ellipsis").classList.add("fade-out");
   document.getElementById("titleArrow").classList.add("fade-in");
+  document.body.classList.add("allowScroll");
+};
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
 };

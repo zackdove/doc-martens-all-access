@@ -39,7 +39,7 @@ class LoopingText {
     this.el = el;
     this.lerp = { current: 0, target: 0 };
     this.interpolationFactor = 0.1;
-    this.speed = vertical ? 0.01 : 0.05;
+    this.speed = 0.3;
     this.direction = el.classList.contains("reverse") ? -1 : 1; // -1 (to-left), 1 (to-right)
     // Init
     this.vertical = vertical;
@@ -49,15 +49,6 @@ class LoopingText {
     }: ${100 * -this.direction}%;`;
     // this.events();
     // this.render();
-  }
-
-  events() {
-    document
-      .getElementById("mainContentContainer")
-      .addEventListener("scroll", () => {
-        console.log("hi");
-        this.lerp.target += this.speed * 2;
-      });
   }
 
   update() {
@@ -93,8 +84,4 @@ render();
 
 updatables.push(
   new LoopingText(document.getElementById("horizontalScrollerContainer"))
-);
-
-updatables.push(
-  new LoopingText(document.getElementById("verticalScrollerContainer"), true)
 );
